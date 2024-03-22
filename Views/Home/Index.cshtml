@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <div class="container py-5">
+        <div class="row justify-content-center mb-3">
+            <div class="col-md-12 col-xl-10">
+                <div class="card shadow-0 border rounded-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                <a href="@Url.Action("Index","Product")" class="btn text-white btn-lg"  style="border-color: black; background-color:black">Danh sách sản phẩm</a>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-6">                               
+                                <a href="@Url.Action("Index","Category")" class="btn text-white btn-lg" style="border-color: black; background-color:black">Danh sách danh mục</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
