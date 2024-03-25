@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using WebBanHang_Lab3.Models;
+using Microsoft.AspNetCore.Identity;
 using WebBanHang_Lab3.Repositories;
-using static WebBanHang_Lab3.Repositories.ICategory;
-using static WebBanHang_Lab3.Repositories.IProduct;
+using WebBanHang_Lab3.DataAccess;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +11,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDBContext>();
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddDefaultUI().AddEntityFrameworkStores<ApplicationDBContext>();
+builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IProduct, EFProduct>();
 builder.Services.AddScoped<ICategory, EFCategory>();
@@ -30,7 +34,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebBanHang_Lab3.DataAccess;
 using WebBanHang_Lab3.Models;
 
 namespace WebBanHang_Lab3.Repositories
