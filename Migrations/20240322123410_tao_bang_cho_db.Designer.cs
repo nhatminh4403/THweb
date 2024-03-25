@@ -11,8 +11,8 @@ using WebBanHang_Lab3.Models;
 namespace WebBanHang_Lab3.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240322061813_tao_bang-cho_db")]
-    partial class tao_bangcho_db
+    [Migration("20240322123410_tao_bang_cho_db")]
+    partial class tao_bang_cho_db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

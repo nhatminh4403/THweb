@@ -11,8 +11,8 @@ using WebBanHang_Lab3.Models;
 namespace WebBanHang_Lab3.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240322061852_them_du_lieu_mau")]
-    partial class them_du_lieu_mau
+    [Migration("20240322123436_them_du_lieu_mau_cho_db")]
+    partial class them_du_lieu_mau_cho_db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
