@@ -51,7 +51,9 @@
                         }
                         else
                         {
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-detail">| Xem chi tiết | </a>
+                            <div class="container py-5 text-center">
+                                | <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-detail">Xem chi tiết</a> |
+                            </div>
                         }
                     </div>
             </div>
