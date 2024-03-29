@@ -1,51 +1,62 @@
 ﻿@model IEnumerable<WebBanHang_Lab3.Models.Product>
-
+@using Microsoft.AspNetCore.Identity
+@using WebBanHang_Lab3.Models
+@inject UserManager<ApplicationUser> userManager
+@inject SignInManager<ApplicationUser> signIn
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Danh sách sản phẩm</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create" class="btn text-white" style="border-color: black; background-color:black">Thêm mới</a>
+    </p>
+}
 
-<p>
-    <a asp-action="Create" class="btn text-white" style="border-color: black; background-color:black">Thêm mới</a>
-</p>
-
-    <section style="background-color: #eee;">
-        @foreach (var item in Model)
-        {
-            <div class="container py-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-4">
-                        <div class="card text-black">
-                            <i class="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
-                                <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="100px"
-                                 class="card-img-top" alt="Product Im" />
-                            <div class="card-body">
-                                <div class="text-center">
-                                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-                                        <p class="text-muted mb-4"> @Html.DisplayFor(modelItem => item.Category.Name)</p>
-                                </div>
-                                <div>
-                          
-                                    <div class="d-flex justify-content-between">
-                                    <span>Mô tả</span><span> @Html.DisplayFor(modelItem => item.Description)</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between total font-weight-bold mt-4">
-                                        <span>Giá tiền</span><span>@Html.DisplayFor(modelItem => item.Price)</span>
-                                </div>
+<div class="container d-flex mt-4">
+    <div class="col-md-9">
+        <div class="row cols-md-3">
+            @foreach(var item in Model)
+            {
+            <div class="col">
+                <div class="card">
+                    <div class="card-image">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn"><img src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="250px"></a>
+                    </div>
+                    <div class="card-inner">
+                        <div class="text-center">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                            <p class="text-muted mb-4"> @Html.DisplayFor(modelItem => item.Category.Name)</p>
+                        </div>
+                        <h5 class="mb-0"> @Html.DisplayFor(modelItem => item.Description)</h5>
+                        <div class="price">
+                            <span>@Html.DisplayFor(modelItem => item.Price)</span>
+                        </div>
+                        <div class="mt-3 d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-row">
+                                <span class="wishlist"><i class="fa fa-heart"></i></span>
+                                <span class="cart"><i class="fa fa-shopping-cart"></i></span>
                             </div>
                         </div>
                     </div>
-                </div>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="container py-5 text-center">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-edit">Chỉnh sửa</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-detail">Xem chi tiết</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-delete">Xoá</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-detail">| Xem chi tiết | </a>
+                        }
+                    </div>
             </div>
-            <div class="container py-5">
-                <div class="justify-content-center text-center">
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn text-white" style="border-color: black; background-color:black">Chỉnh sửa</a> |
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn text-black" style="border-color: black; background-color:white">Xem chi tiết</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn text-white" style="border-color: black; background-color:black">Xoá</a>
-                </div>
-            </div>
-        }
-    </section>
+            }
+        </div>
+    </div>
+</div>
 

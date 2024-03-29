@@ -4,7 +4,7 @@ using WebBanHang_Lab3.Models;
 
 namespace WebBanHang_Lab3.DataAccess
 {
-    public class ApplicationDBContext : IdentityDbContext
+    public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> option) : base(option) { }
 

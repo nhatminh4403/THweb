@@ -6,14 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBanHang_Lab3.DataAccess;
 
-
 #nullable disable
 
 namespace WebBanHang_Lab3.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240322123436_them_du_lieu_mau_cho_db")]
-    partial class them_du_lieu_mau_cho_db
+    [Migration("20240329055839_them_du_lieu_mau")]
+    partial class them_du_lieu_mau
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

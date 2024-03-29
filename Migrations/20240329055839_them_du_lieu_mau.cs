@@ -5,15 +5,15 @@
 namespace WebBanHang_Lab3.Migrations
 {
     /// <inheritdoc />
-    public partial class them_du_lieu_mau_cho_db : Migration
+    public partial class them_du_lieu_mau : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
-               table: "Categories",
-               columns: ["Id", "Name"],
-               values: [1, "Điện thoại"]);
+              table: "Categories",
+              columns: ["Id", "Name"],
+              values: [1, "Điện thoại"]);
             migrationBuilder.InsertData(
                table: "Categories",
                columns: ["Id", "Name"],

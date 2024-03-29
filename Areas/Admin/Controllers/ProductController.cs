@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebBanHang_Lab3.Models;
 using WebBanHang_Lab3.Repositories;
-using static WebBanHang_Lab3.Repositories.ICategory;
-using static WebBanHang_Lab3.Repositories.IProduct;
 
-namespace WebBanHang_Lab3.Controllers
+namespace WebBanHang_Lab3.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IProduct _productRepository;
@@ -17,11 +18,13 @@ namespace WebBanHang_Lab3.Controllers
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var products = await _productRepository.GetAllAsync();
             return View(products);
         }
+        
         public async Task<IActionResult> Create()
         {
             var categories = await _categoryRepository.GetAllAsync();
@@ -58,6 +61,7 @@ namespace WebBanHang_Lab3.Controllers
             }
             return "/images/" + image.FileName;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
@@ -84,18 +88,18 @@ namespace WebBanHang_Lab3.Controllers
         }
         // Xử lý cập nhật sản phẩm
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Product product,IFormFile imageUrl)
+        public async Task<IActionResult> Edit(int id, Product product, IFormFile imageUrl)
         {
-            ModelState.Remove("ImageUrl"); 
-        
+            ModelState.Remove("ImageUrl");
+
             if (id != product.Id)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
-                var existingProduct = await   _productRepository.GetByIdAsync(id); 
-            
+                var existingProduct = await _productRepository.GetByIdAsync(id);
+
                 if (imageUrl == null)
                 {
                     product.ImageUrl = existingProduct.ImageUrl;
@@ -138,4 +142,3 @@ namespace WebBanHang_Lab3.Controllers
         }
     }
 }
-

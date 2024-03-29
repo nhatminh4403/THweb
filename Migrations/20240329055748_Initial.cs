@@ -5,7 +5,7 @@
 namespace WebBanHang_Lab3.Migrations
 {
     /// <inheritdoc />
-    public partial class tao_bang_cho_db : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
