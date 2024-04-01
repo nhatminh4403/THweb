@@ -21,6 +21,16 @@ body {
   margin-bottom: 60px;
 }
 
+
+
+a {
+    color:white;
+    text-decoration: none;
+}
+a:hover{
+    color:black;
+}
+
 .btn-edit {
     border-color: black;
     background-color: black;
