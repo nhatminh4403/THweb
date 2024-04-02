@@ -1,0 +1,48 @@
+﻿@model ShoppingCart
+@using WebBanHang_Lab3.Models
+@using WebBanHang_Lab3.DataAccess
+@{
+	ViewData["Title"] = "Index";
+	decimal total = Model.Items.Sum(item => item.Price * item.Quantity);
+	int totalQuantity = Model.Items.Sum(item => item.Quantity);
+}
+
+<h2>Giỏ hàng</h2>
+<h3 class="mb-0">Bạn có @totalQuantity sản phẩm trong giỏ</h3>
+<span>
+	Tổng giá tiền: @total
+</span>
+<section>
+	@foreach (var item in Model.Items)
+	{
+		<br />
+		<div class="card mb-3">
+			<div class="card-body">
+				<div class="d-flex justify-content-between">
+					<div class="d-flex flex-row align-items-center">
+						<div>
+							<img src="@item.ImageUrl"
+								 class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+						</div>
+						<div class="ms-3">
+							<h5>@item.Name</h5>
+							<p class="small mb-0">@item.Description</p>
+						</div>
+					</div>
+					<div class="d-flex flex-row align-items-center">
+						<div style="width: 50px;">
+							<h5 class="fw-normal mb-0">@item.Quantity</h5>
+						</div>
+						<div style="width: 80px;">
+							<h5 class="mb-0">@item.Price</h5>
+						</div>
+						<a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" class="btn btn-edit"><i class="fa fa-trash-o"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+	<a asp-action="Checkout" class="btn btn-edit"><i class="fa-solid fa-check" aria-hidden="true"></i></a>
+</section>
+   
+

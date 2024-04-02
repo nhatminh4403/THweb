@@ -1,14 +1,20 @@
 ﻿@model IEnumerable<WebBanHang_Lab3.Models.Category>
-
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index"; Layout = "_Layout";
 }
 
-<h1>Index</h1>
+<h1>Danh sách danh mục</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Thêm danh mục</a>
+    </p>
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -19,17 +25,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-edit">Edit</a> |
-                <a asp-action="Display" asp-route-id="@item.Id" class="btn btn-detail">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-delete">Delete</a>
-            </td>
-        </tr>
-}
+        @if (User.IsInRole("Admin"))
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@item.Id" class="btn text-white" style="border-color: black; background-color:black">Chỉnh sửa</a> |
+                        <a asp-action="Display" asp-route-id="@item.Id" class="btn text-black" style="border-color: black; background-color:white">Xem chi tiết</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn text-white" style="border-color: black; background-color:black">Xoá</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>

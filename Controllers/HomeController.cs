@@ -1,21 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebBanHang_Lab3.Models;
+using WebBanHang_Lab3.Repositories;
 
 namespace WebBanHang_Lab3.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProduct _productRepo;
+        public HomeController(ILogger<HomeController> logger, IProduct productRepo)
         {
             _logger = logger;
+            _productRepo = productRepo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var product = await _productRepo.GetAllAsync();
+            return View(product);
         }
 
         public IActionResult Privacy()

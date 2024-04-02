@@ -5,7 +5,7 @@ using WebBanHang_Lab3.Repositories;
 
 namespace WebBanHang_Lab3.Areas.Admin.Controllers
 {
-
+    [Area("Admin")]
     [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
@@ -17,11 +17,13 @@ namespace WebBanHang_Lab3.Areas.Admin.Controllers
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var category = await _categoryRepository.GetAllAsync();
             return View(category);
         }
+        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> Display(int id)
         {
             var category = await _categoryRepository.GetByIdAsync(id);
@@ -31,6 +33,7 @@ namespace WebBanHang_Lab3.Areas.Admin.Controllers
             }
             return View(category);
         }
+        [Authorize(Roles = SD.Role_Admin)]
         public IActionResult Create()
         {
             return View();
@@ -45,6 +48,7 @@ namespace WebBanHang_Lab3.Areas.Admin.Controllers
             }
             return View(category);
         }
+        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> Update(int id)
         {
             var category = await _categoryRepository.GetByIdAsync(id);
@@ -68,6 +72,7 @@ namespace WebBanHang_Lab3.Areas.Admin.Controllers
             }
             return View(category);
         }
+        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             var category = await _categoryRepository.GetByIdAsync(id);

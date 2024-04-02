@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using WebBanHang_Lab3.Models;
 using WebBanHang_Lab3.Repositories;
 
 namespace WebBanHang_Lab3.Areas.Admin.Controllers
 {
-
+    [Area("Admin")]
     [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
@@ -24,7 +25,7 @@ namespace WebBanHang_Lab3.Areas.Admin.Controllers
             var products = await _productRepository.GetAllAsync();
             return View(products);
         }
-        
+        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> Create()
         {
             var categories = await _categoryRepository.GetAllAsync();
@@ -72,6 +73,7 @@ namespace WebBanHang_Lab3.Areas.Admin.Controllers
             return View(product);
         }
         // Hiển thị form cập nhật sản phẩm
+        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> Edit(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
@@ -124,6 +126,7 @@ namespace WebBanHang_Lab3.Areas.Admin.Controllers
             return View(product);
         }
         // Hiển thị form xác nhận xóa sản phẩm
+        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
@@ -140,5 +143,10 @@ namespace WebBanHang_Lab3.Areas.Admin.Controllers
             await _productRepository.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public const string CARTKEY = "cart";
+
+        // Lấy cart từ Session (danh sách CartItem)
+        
     }
 }

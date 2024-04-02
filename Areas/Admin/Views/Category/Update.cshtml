@@ -1,12 +1,15 @@
 ﻿@model WebBanHang_Lab3.Models.Category
-
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "Update"; Layout = "_Layout";
 }
 
-<h1>Update</h1>
+<h1>Cập nhật</h1>
 
-<h4>Category</h4>
+<h4>Danh mục</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -26,6 +29,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn text-white" style="border-color: black; background-color:black">Trở về danh sách</a>
 </div>
 

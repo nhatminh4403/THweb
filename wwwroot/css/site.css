@@ -21,6 +21,9 @@ body {
   margin-bottom: 60px;
 }
 
+#button-no-outline {
+    border: 1px solid transparent;
+}
 
 
 a {
