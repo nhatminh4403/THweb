@@ -109,6 +109,9 @@ namespace WebBanHang_Lab3.Controllers
             HttpContext.Session.Remove("Cart");
             return View("OrderCompleted", order.Id); // Trang xác nhận hoàn thành đơn hàng
         }
-      
+        public IActionResult OrderCompleted()
+        {
+            return View();
+        }
     }
 }
