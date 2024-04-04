@@ -7,7 +7,34 @@ html {
     font-size: 16px;
   }
 }
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+@media (max-width: 992px) {
+    .card-body {
+        text-align: left;
+    }
+}
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.description {
+    flex-grow: 1; /* Allow description to expand vertically */
+}
 
+.card-title {
+    font-size: 1.25rem; /* Adjust font size to prevent wrapping */
+}
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 1rem; /* Reduce font size for smaller screens */
+    }
+}
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
