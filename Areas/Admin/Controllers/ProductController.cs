@@ -143,10 +143,5 @@ namespace WebBanHang_Lab3.Areas.Admin.Controllers
             await _productRepository.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
-
-        public const string CARTKEY = "cart";
-
-        // Lấy cart từ Session (danh sách CartItem)
-        
     }
 }
