@@ -53,7 +53,21 @@ namespace WebBanHang_Lab3.Controllers
                 throw new ProductNotFoundException($"Product with ID {productId} not found.");
             }
         }
-        public IActionResult RemoveFromCart(int productId)
+        public IActionResult Increase(int productId)
+        {
+			var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart") ?? new ShoppingCart();
+			cart.IncreaseQuantity(productId);
+			HttpContext.Session.SetObjectAsJson("Cart", cart);
+			return RedirectToAction(nameof(Index));
+		}
+		public IActionResult Decrease(int productId)
+		{
+			var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart");
+			cart.DecreaseQuantity(productId);
+			HttpContext.Session.SetObjectAsJson("Cart", cart);
+			return RedirectToAction(nameof(Index));
+		}
+		public IActionResult RemoveFromCart(int productId)
         {
             var cart =
            HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart");
@@ -67,9 +81,7 @@ namespace WebBanHang_Lab3.Controllers
         }
         public IActionResult Index()
         {
-            var cart =
-           HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart") ?? new
-           ShoppingCart();
+            var cart =  HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart") ?? new  ShoppingCart();
             return View(cart);
         }
         // Các actions khác...
@@ -101,7 +113,7 @@ namespace WebBanHang_Lab3.Controllers
             {
                 ProductId = i.ProductId,
                 Quantity = i.Quantity,
-                Price = i.Price
+                Price = i.Price * i.Quantity
             }).ToList();
 
             _context.Orders.Add(order);
@@ -113,5 +125,7 @@ namespace WebBanHang_Lab3.Controllers
         {
             return View();
         }
-    }
+
+		
+	}
 }

@@ -9,10 +9,12 @@ namespace WebBanHang_Lab3.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProduct _productRepo;
-        public HomeController(ILogger<HomeController> logger, IProduct productRepo)
+        private readonly ICategory _categoryRepo;
+        public HomeController(ILogger<HomeController> logger, IProduct productRepo, ICategory categoryRepo)
         {
             _logger = logger;
             _productRepo = productRepo;
+            _categoryRepo = categoryRepo;
         }
 
         public async Task<IActionResult> Index()
@@ -20,7 +22,21 @@ namespace WebBanHang_Lab3.Controllers
             var product = await _productRepo.GetAllAsync();
             return View(product);
         }
+        public async Task<IActionResult> Details(int id)
+        {
+            var product = await _productRepo.GetByIdAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
 
+        public async Task<IActionResult> GetAllCategory()
+        {
+            var category = await _categoryRepo.GetAllAsync();
+            return View(category);
+        }
         public IActionResult Privacy()
         {
             return View();
